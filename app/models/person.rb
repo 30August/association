@@ -1,7 +1,7 @@
 class Person < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user, optional: true, strict_loading: true
 
-  has_many :debts, dependent: :destroy
+  has_many :debts, dependent: :destroy, strict_loading: true
 
   validates :name, :national_id, presence: true
   validates :national_id, uniqueness: true

@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+
   before_action :set_person, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
@@ -15,7 +16,7 @@ class PeopleController < ApplicationController
       @active = true
     end
 
-    @people = Person.where(active: @active).paginate(page: params[:page], per_page: 100)
+    @people = Person.includes(:user).includes(:debts).where(active: @active).paginate(page: params[:page], per_page: 30)
   end
 
   # GET /people/search?q=a_name
